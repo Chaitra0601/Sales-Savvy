@@ -16,12 +16,12 @@ public class JwtToken {
 
     @Column(nullable = false, length = 512)
     private String token;
-
-    @Column(name = "createdAt")
-    private LocalDateTime createdAt;
+    
+    @Column(nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "expiresAt", nullable = false)
-    private LocalDateTime expiresAt;
+    private LocalDateTime expiresAt = LocalDateTime.now();
 
 	/**
 	 * 

@@ -7,7 +7,7 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
@@ -15,14 +15,11 @@ public class CartItem {
 
     @ManyToOne
     @JoinColumn(name = "productid", nullable = false)
-    private Product product;
-
-    @Column(nullable = false)
-    private Integer quantity;
-
-	/**
-	 * 
-	 */
+    private  Product product;
+    
+    @Column
+    int quantity;
+    
 	public CartItem() {
 		// TODO Auto-generated constructor stub
 	}
@@ -33,7 +30,7 @@ public class CartItem {
 	 * @param product
 	 * @param quantity
 	 */
-	public CartItem(Integer id, User user, Product product, Integer quantity) {
+	public CartItem(int id, User user, Product product, int quantity) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -46,18 +43,18 @@ public class CartItem {
 	 * @param product
 	 * @param quantity
 	 */
-	public CartItem(User user, Product product, Integer quantity) {
+	public CartItem(User user, Product product, int quantity) {
 		super();
 		this.user = user;
 		this.product = product;
 		this.quantity = quantity;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -77,18 +74,13 @@ public class CartItem {
 		this.product = product;
 	}
 
-	public Integer getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-	@Override
-	public String toString() {
-		return "CartItem [id=" + id + ", user=" + user + ", product=" + product + ", quantity=" + quantity + "]";
-	}
-
-    
+	
 }

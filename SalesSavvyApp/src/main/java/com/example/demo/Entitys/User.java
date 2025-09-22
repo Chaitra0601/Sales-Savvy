@@ -23,11 +23,12 @@ public class User {
     @Column(nullable = false)
     private Role role; // admin / customer
 
-    @Column(name = "createdAt")
-    private LocalDateTime createdAt;
+    @Column(nullable = false)
+    
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column(name = "updatedAt")
-    private LocalDateTime updatedAt;
+    @Column(nullable = false)
+    private LocalDateTime updatedAt  = LocalDateTime.now();
 
 	/**
 	 * @param userid

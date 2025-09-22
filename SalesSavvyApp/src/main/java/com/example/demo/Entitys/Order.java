@@ -20,11 +20,11 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status = OrderStatus.pending;
 
-    @Column(name = "createdAt")
-    private LocalDateTime createdAt;
+    @Column(nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column(name = "updatedAt")
-    private LocalDateTime updatedAt;
+    @Column(nullable = false)
+    private LocalDateTime updatedAt  = LocalDateTime.now();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();

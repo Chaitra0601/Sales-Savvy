@@ -35,7 +35,7 @@ public class UserService {
 
         // Assign default role if not provided
         if (user.getRole() == null) {
-            user.setRole(Role.customer); // match enum
+            user.setRole(Role.CUSTOMER); // match enum
         }
 
         // Save user and return
