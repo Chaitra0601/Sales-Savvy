@@ -8,7 +8,7 @@ import com.example.demo.Entitys.CartItem;
 import com.example.demo.Entitys.Product;
 import com.example.demo.Entitys.ProductImage;
 import com.example.demo.Entitys.User;
-import com.example.demo.Repositorys.CartItemRepository;
+import com.example.demo.Repositorys.CartRepository;
 import com.example.demo.Repositorys.ProductImageRepository;
 import com.example.demo.Repositorys.ProductRepository;
 import com.example.demo.Repositorys.UserRepository;
@@ -19,7 +19,7 @@ import java.util.*;
 public class CartService {
 
     @Autowired
-    private CartItemRepository cartRepository;
+    private CartRepository cartRepository;
 
     @Autowired
     private UserRepository userRepository;

@@ -1,5 +1,7 @@
 package com.example.demo.Entitys;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,8 +18,8 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false)
-    private Double price;
+    @Column(precision = 19, scale = 4, nullable = false)
+    private BigDecimal price;
 
     @Column(nullable = false)
     private Integer stock;
@@ -26,10 +28,10 @@ public class Product {
     @JoinColumn(name = "categoryid")
     private Category category;
    
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime created_at = LocalDateTime.now();
 
-    @Column(nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updated_at  = LocalDateTime.now();
 
 	/**
@@ -46,11 +48,11 @@ public class Product {
 	 * @param price
 	 * @param stock
 	 * @param category
-	 * @param createdAt
-	 * @param updatedAt
+	 * @param created_at
+	 * @param updated_at
 	 */
-	public Product(Integer productid, String name, String description, Double price, Integer stock, Category category,
-			LocalDateTime created_at, LocalDateTime updated_at) {
+	public Product(Integer productid, String name, String description, BigDecimal price, Integer stock,
+			Category category, LocalDateTime created_at, LocalDateTime updated_at) {
 		super();
 		this.productid = productid;
 		this.name = name;
@@ -68,10 +70,10 @@ public class Product {
 	 * @param price
 	 * @param stock
 	 * @param category
-	 * @param createdAt
-	 * @param updatedAt
+	 * @param created_at
+	 * @param updated_at
 	 */
-	public Product(String name, String description, Double price, Integer stock, Category category,
+	public Product(String name, String description, BigDecimal price, Integer stock, Category category,
 			LocalDateTime created_at, LocalDateTime updated_at) {
 		super();
 		this.name = name;
@@ -82,7 +84,6 @@ public class Product {
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 	}
-	
 
 	public Integer getProductid() {
 		return productid;
@@ -108,11 +109,11 @@ public class Product {
 		this.description = description;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -136,7 +137,7 @@ public class Product {
 		return created_at;
 	}
 
-	public void setCreatedAt(LocalDateTime created_at) {
+	public void setCreated_at(LocalDateTime created_at) {
 		this.created_at = created_at;
 	}
 
@@ -148,10 +149,4 @@ public class Product {
 		this.updated_at = updated_at;
 	}
 
-	@Override
-	public String toString() {
-		return "Product [productid=" + productid + ", name=" + name + ", description=" + description + ", price="
-				+ price + ", stock=" + stock + ", category=" + category + ", created_at=" + created_at + ", updated_at="
-				+ updated_at + "]";
-	}
 }

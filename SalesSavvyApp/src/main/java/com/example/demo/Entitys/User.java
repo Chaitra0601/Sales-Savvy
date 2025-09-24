@@ -23,12 +23,11 @@ public class User {
     @Column(nullable = false)
     private Role role; // admin / customer
 
-    @Column(nullable = false)
-    
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime created_at = LocalDateTime.now();
 
-    @Column(nullable = false)
-    private LocalDateTime updatedAt  = LocalDateTime.now();
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updated_at  = LocalDateTime.now();
 
 	/**
 	 * @param userid
@@ -42,34 +41,44 @@ public class User {
     public User() {
     }
 
-	public User(Integer userid, String username, String email, String password, Role role, LocalDateTime createdAt,
-			LocalDateTime updatedAt) {
+	/**
+	 * @param userid
+	 * @param username
+	 * @param email
+	 * @param password
+	 * @param role
+	 * @param created_at
+	 * @param updated_at
+	 */
+	public User(Integer userid, String username, String email, String password, Role role, LocalDateTime created_at,
+			LocalDateTime updated_at) {
 		super();
 		this.userid = userid;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.role = role;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
+		this.created_at = created_at;
+		this.updated_at = updated_at;
 	}
+
 	/**
 	 * @param username
 	 * @param email
 	 * @param password
 	 * @param role
-	 * @param createdAt
-	 * @param updatedAt
+	 * @param created_at
+	 * @param updated_at
 	 */
-	public User(String username, String email, String password, Role role, LocalDateTime createdAt,
-			LocalDateTime updatedAt) {
+	public User(String username, String email, String password, Role role, LocalDateTime created_at,
+			LocalDateTime updated_at) {
 		super();
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.role = role;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
+		this.created_at = created_at;
+		this.updated_at = updated_at;
 	}
 
 	public Integer getUserid() {
@@ -112,27 +121,21 @@ public class User {
 		this.role = role;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
+	public LocalDateTime getCreated_at() {
+		return created_at;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
+	public void setCreated_at(LocalDateTime created_at) {
+		this.created_at = created_at;
 	}
 
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
+	public LocalDateTime getUpdated_at() {
+		return updated_at;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setUpdated_at(LocalDateTime updated_at) {
+		this.updated_at = updated_at;
 	}
-	
-	@Override
-    public String toString() {
-        return "User [userid=" + userid + ", username=" + username + ", email=" + email +
-               ", password=" + password + ", role=" + role +
-               ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
-	}
+
 	
 }

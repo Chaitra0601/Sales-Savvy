@@ -63,7 +63,7 @@ public class AuthService {
         JwtToken tokenEntity = new JwtToken();
         tokenEntity.setUser(user);
         tokenEntity.setToken(jwt);
-        tokenEntity.setExpiresAt(LocalDateTime.now().plusSeconds(jwtExpirationMs / 1000));
+        tokenEntity.setExpires_at(LocalDateTime.now().plusSeconds(jwtExpirationMs / 1000));
         jwtTokenRepository.save(tokenEntity);
 
         return jwt;
@@ -87,9 +87,9 @@ public class AuthService {
             // Check if the token exists in the database and is not expired
             Optional<JwtToken> jwtToken = jwtTokenRepository.findByToken(token);
             if (jwtToken.isPresent()) {
-                System.err.println("Token Expiry: " + jwtToken.get().getExpiresAt());
+                System.err.println("Token Expiry: " + jwtToken.get().getExpires_at());
                 System.err.println("Current Time: " + LocalDateTime.now());
-                return jwtToken.get().getExpiresAt().isAfter(LocalDateTime.now());
+                return jwtToken.get().getExpires_at().isAfter(LocalDateTime.now());
             }
 
             return false;
@@ -107,4 +107,17 @@ public class AuthService {
                 .getBody()
                 .getSubject();
     }
+    
+        public void logout(User user) {
+            int userId = user.getUserid();
+
+            // Retrieve the JWT token associated with the user
+            JwtToken token = jwtTokenRepository.findByUserid(userId);
+
+            // If a token exists, delete it from the repository
+            if (token != null) {
+                jwtTokenRepository.deleteById(userId);
+            }
+        }
 }
+

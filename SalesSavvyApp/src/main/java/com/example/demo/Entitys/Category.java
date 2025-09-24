@@ -3,6 +3,8 @@ package com.example.demo.Entitys;
 import jakarta.persistence.*;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -15,6 +17,7 @@ public class Category {
     private String categoryname;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Product> products = new ArrayList<>();
 
     // No-arg constructor (required by Hibernate)

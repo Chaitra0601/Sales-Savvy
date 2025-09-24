@@ -1,4 +1,6 @@
 package com.example.demo.Entitys;
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -7,24 +9,24 @@ public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderid", nullable = false)
     private Order order;
-
+    
     @ManyToOne
     @JoinColumn(name = "productid", nullable = false)
-    private Product product;
+    private  Product product;
 
-    @Column(nullable = false)
-    private Integer quantity;
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
 
-    @Column(nullable = false)
-    private Double priceperunit;
+    @Column(precision = 19, scale = 4, name = "priceperunit", nullable = false)
+    private BigDecimal priceperunit;
 
-    @Column(nullable = false)
-    private Double totalprice;
+    @Column(precision = 19, scale = 4, name = "totalprice", nullable = false)
+    private BigDecimal totalprice;
 
 	/**
 	 * 
@@ -35,14 +37,14 @@ public class OrderItem {
 
 	/**
 	 * @param id
-	 * @param order
+	 * @param orderid
 	 * @param product
 	 * @param quantity
 	 * @param priceperunit
 	 * @param totalprice
 	 */
-	public OrderItem(Integer id, Order order, Product product, Integer quantity, Double priceperunit,
-			Double totalprice) {
+	public OrderItem(int id, Order order, Product product, int quantity, BigDecimal priceperunit,
+			BigDecimal totalprice) {
 		super();
 		this.id = id;
 		this.order = order;
@@ -53,13 +55,13 @@ public class OrderItem {
 	}
 
 	/**
-	 * @param order
+	 * @param orderid
 	 * @param product
 	 * @param quantity
 	 * @param priceperunit
 	 * @param totalprice
 	 */
-	public OrderItem(Order order, Product product, Integer quantity, Double priceperunit, Double totalprice) {
+	public OrderItem(Order order, Product product, int quantity, BigDecimal priceperunit, BigDecimal totalprice) {
 		super();
 		this.order = order;
 		this.product = product;
@@ -68,11 +70,11 @@ public class OrderItem {
 		this.totalprice = totalprice;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -92,35 +94,28 @@ public class OrderItem {
 		this.product = product;
 	}
 
-	public Integer getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-	public Double getPriceperunit() {
+	public BigDecimal getPriceperunit() {
 		return priceperunit;
 	}
 
-	public void setPriceperunit(Double priceperunit) {
+	public void setPriceperunit(BigDecimal priceperunit) {
 		this.priceperunit = priceperunit;
 	}
 
-	public Double getTotalprice() {
+	public BigDecimal getTotalprice() {
 		return totalprice;
 	}
 
-	public void setTotalprice(Double totalprice) {
+	public void setTotalprice(BigDecimal totalprice) {
 		this.totalprice = totalprice;
 	}
 
-	@Override
-	public String toString() {
-		return "OrderItem [id=" + id + ", order=" + order + ", product=" + product + ", quantity=" + quantity
-				+ ", priceperunit=" + priceperunit + ", totalprice=" + totalprice + "]";
-	}
-
-    
 }

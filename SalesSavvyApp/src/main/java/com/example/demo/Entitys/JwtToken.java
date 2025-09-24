@@ -17,11 +17,11 @@ public class JwtToken {
     @Column(nullable = false, length = 512)
     private String token;
     
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime created_at = LocalDateTime.now();
 
-    @Column(name = "expiresAt", nullable = false)
-    private LocalDateTime expiresAt = LocalDateTime.now();
+    @Column(name = "expires_at", nullable = false)
+    private LocalDateTime expires_at = LocalDateTime.now();
 
 	/**
 	 * 
@@ -34,30 +34,30 @@ public class JwtToken {
 	 * @param tokenid
 	 * @param user
 	 * @param token
-	 * @param createdAt
-	 * @param expiresAt
+	 * @param created_at
+	 * @param expires_at
 	 */
-	public JwtToken(Integer tokenid, User user, String token, LocalDateTime createdAt, LocalDateTime expiresAt) {
+	public JwtToken(Integer tokenid, User user, String token, LocalDateTime created_at, LocalDateTime expires_at) {
 		super();
 		this.tokenid = tokenid;
 		this.user = user;
 		this.token = token;
-		this.createdAt = createdAt;
-		this.expiresAt = expiresAt;
+		this.created_at = created_at;
+		this.expires_at = expires_at;
 	}
 
 	/**
 	 * @param user
 	 * @param token
-	 * @param createdAt
-	 * @param expiresAt
+	 * @param created_at
+	 * @param expires_at
 	 */
-	public JwtToken(User user, String token, LocalDateTime createdAt, LocalDateTime expiresAt) {
+	public JwtToken(User user, String token, LocalDateTime created_at, LocalDateTime expires_at) {
 		super();
 		this.user = user;
 		this.token = token;
-		this.createdAt = createdAt;
-		this.expiresAt = expiresAt;
+		this.created_at = created_at;
+		this.expires_at = expires_at;
 	}
 
 	public Integer getTokenid() {
@@ -84,27 +84,21 @@ public class JwtToken {
 		this.token = token;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
+	public LocalDateTime getCreated_at() {
+		return created_at;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
+	public void setCreated_at(LocalDateTime created_at) {
+		this.created_at = created_at;
 	}
 
-	public LocalDateTime getExpiresAt() {
-		return expiresAt;
+	public LocalDateTime getExpires_at() {
+		return expires_at;
 	}
 
-	public void setExpiresAt(LocalDateTime expiresAt) {
-		this.expiresAt = expiresAt;
+	public void setExpires_at(LocalDateTime expires_at) {
+		this.expires_at = expires_at;
 	}
-
-	@Override
-	public String toString() {
-		return "JwtToken [tokenid=" + tokenid + ", user=" + user + ", token=" + token + ", createdAt=" + createdAt
-				+ ", expiresAt=" + expiresAt + "]";
-	}
-
-    
+	
+	
 }
