@@ -76,7 +76,9 @@ public class CartService {
             Product product = cartItem.getProduct();
             // Fetch product images
             List<ProductImage> productImages = productImageRepository.findByProduct_Productid(product.getProductid());
-            String imageUrl = productImages.get(0).getImageurl();
+            String imageUrl = productImages.isEmpty() 
+                    ? "https://via.placeholder.com/80" 
+                    : productImages.get(0).getImageurl();
             // Populate product details
             productDetails.put("id", product.getProductid());
             productDetails.put("image_url", imageUrl);

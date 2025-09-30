@@ -13,14 +13,17 @@ import java.util.Optional;
 
 @Repository
 public interface JwtTokenRepository extends JpaRepository<JwtToken, Integer> {
-    Optional<JwtToken> findByToken(String token);
-    @Query("SELECT t FROM JwtToken t where t.user.userid = :userid")
-    JwtToken findByUserid(@Param("userid") int userid);
+   //Finde a token by its value
+	Optional<JwtToken> findByToken(String token);
+	
+	//Custom query to find tokens by user ID
+    @Query("SELECT t FROM JwtToken t where t.user.userid = :userId")
+    JwtToken findByUserid(@Param("userId") int userId);
     
     // Custom query to delete tokens by user ID
     @Modifying
     @Transactional
-    @Query("DELETE FROM JwtToken t WHERE t.user.userid = :userid")
-    JwtToken deleteByUserid(@Param("userid") int userid);
+    @Query("DELETE FROM JwtToken t WHERE t.user.userid = :userId")
+    int deleteByUserid(@Param("userId") int userId);
     
 }

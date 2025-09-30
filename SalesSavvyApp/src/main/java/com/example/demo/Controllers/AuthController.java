@@ -1,6 +1,5 @@
 package com.example.demo.Controllers;
 
-import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import com.example.demo.Services.AuthService;
 import com.example.demo.dto.LoginRequest;
 
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
@@ -59,12 +57,19 @@ public class AuthController {
         }
     }
     
-    @PostMapping("/logout")
+   /* @PostMapping("/logout")
     public ResponseEntity<Map<String, String>> logout(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            // Retrieve authenticated user from the request
-            User user = (User) request.getAttribute("authenticatedUser");
+        Map<String, String> responseBody = new HashMap<>();
+        
+        // Retrieve authenticated user from the request
+        User user = (User) request.getAttribute("authenticatedUser");
+        
+        if (user == null) {
+            responseBody.put("message", "User not authenticated");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseBody);
+        }
 
+        try {
             // Delegate logout operation to the service layer
             authService.logout(user);
 
@@ -75,16 +80,35 @@ public class AuthController {
             cookie.setPath("/");
             response.addCookie(cookie);
 
-            // Success response
-            Map<String, String> responseBody = new HashMap<>();
             responseBody.put("message", "Logout successful");
             return ResponseEntity.ok(responseBody);
-        } catch (RuntimeException e) {
-            // Error response
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Logout failed");
-            return ResponseEntity.status(500).body(errorResponse);
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exact exception
+            responseBody.put("message", "Logout failed: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
+        }
+    } */
+
+    
+    @PostMapping("/logout")
+    public ResponseEntity<Map<String, String>> logout(HttpServletResponse response) {
+        try {
+            // Clear the authentication token cookie
+            Cookie cookie = new Cookie("authToken", null);
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge(0);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
+            // Return success message
+            Map<String, String> responseBody = Map.of("message", "Logout successful");
+            return ResponseEntity.ok(responseBody);
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception
+            Map<String, String> responseBody = Map.of("message", "Logout failed: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseBody);
         }
     }
+
 
 }

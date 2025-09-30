@@ -18,6 +18,7 @@ import com.example.demo.Repositorys.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.transaction.Transactional;
 
 @Service
 public class AuthService {
@@ -108,16 +109,19 @@ public class AuthService {
                 .getSubject();
     }
     
-        public void logout(User user) {
-            int userId = user.getUserid();
-
-            // Retrieve the JWT token associated with the user
-            JwtToken token = jwtTokenRepository.findByUserid(userId);
-
-            // If a token exists, delete it from the repository
-            if (token != null) {
-                jwtTokenRepository.deleteById(userId);
-            }
+    @Transactional
+    public void logout(User user) {
+        int deleted = jwtTokenRepository.deleteByUserid(user.getUserid());
+        if (deleted == 0) {
+            System.out.println("No token found for userId: " + user.getUserid());
+        } else {
+            System.out.println("Token deleted for userId: " + user.getUserid());
         }
+    }
+
+    public Optional<JwtToken> findTokenInDB(String token) {
+        return jwtTokenRepository.findByToken(token);
+    }
+
 }
 

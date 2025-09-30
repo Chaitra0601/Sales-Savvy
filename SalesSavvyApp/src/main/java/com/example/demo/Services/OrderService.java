@@ -63,7 +63,7 @@ public class OrderService {
             productDetails.put("name", product.getName());
             productDetails.put("description", product.getDescription());
             productDetails.put("price_per_unit", item.getPriceperunit());
-            productDetails.put("imageUrl", imageUrl);
+            productDetails.put("image_url", imageUrl);
 
             products.add(productDetails);
         }

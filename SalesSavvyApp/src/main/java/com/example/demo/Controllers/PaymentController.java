@@ -59,9 +59,9 @@ public class PaymentController {
             int userId = user.getUserid();
 
             // Extract Razorpay payment details from the request body
-            String razorpayOrderId = (String) requestBody.get("razorpayOrderId");
-            String razorpayPaymentId = (String) requestBody.get("razorpayPaymentId");
-            String razorpaySignature = (String) requestBody.get("razorpaySignature");
+            String razorpayOrderId = (String) requestBody.get("razorpay_order_id");
+            String razorpayPaymentId = (String) requestBody.get("razorpay_payment_id");
+            String razorpaySignature = (String) requestBody.get("razorpay_signature");
 
             boolean isVerified = paymentService.verifyPayment(
                     razorpayOrderId,
